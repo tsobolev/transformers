@@ -179,6 +179,8 @@ class WhisperTokenizerFast(PreTrainedTokenizerFast):
         self.task = task
         self.predict_timestamps = predict_timestamps
 
+        self.set_prefix_tokens()
+
     # Copied from transformers.models.gpt2.tokenization_gpt2_fast.GPT2TokenizerFast._batch_encode_plus
     def _batch_encode_plus(self, *args, **kwargs) -> BatchEncoding:
         is_split_into_words = kwargs.get("is_split_into_words", False)
