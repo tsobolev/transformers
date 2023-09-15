@@ -179,10 +179,11 @@ class WhisperTokenizerFast(PreTrainedTokenizerFast):
         self.task = task
         self.predict_timestamps = predict_timestamps
 
-        self.set_prefix_tokens()
-
     # Copied from transformers.models.gpt2.tokenization_gpt2_fast.GPT2TokenizerFast._batch_encode_plus
     def _batch_encode_plus(self, *args, **kwargs) -> BatchEncoding:
+        
+        self.set_prefix_tokens()
+
         is_split_into_words = kwargs.get("is_split_into_words", False)
         assert self.add_prefix_space or not is_split_into_words, (
             f"You need to instantiate {self.__class__.__name__} with add_prefix_space=True "
@@ -193,6 +194,9 @@ class WhisperTokenizerFast(PreTrainedTokenizerFast):
 
     # Copied from transformers.models.gpt2.tokenization_gpt2_fast.GPT2TokenizerFast._encode_plus
     def _encode_plus(self, *args, **kwargs) -> BatchEncoding:
+        
+        self.set_prefix_tokens()
+
         is_split_into_words = kwargs.get("is_split_into_words", False)
 
         assert self.add_prefix_space or not is_split_into_words, (
